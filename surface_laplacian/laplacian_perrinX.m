@@ -118,6 +118,7 @@ end
 Gs = G + eye(numelectrodes)*smoothing;
 
 % compute C matrix
+Gi = inv(Gs);
 GsinvS = sum(inv(Gs)); % sum of each column
 dataGs = data'/Gs;
 C      = dataGs - (sum(dataGs,2)/sum(GsinvS))*GsinvS;

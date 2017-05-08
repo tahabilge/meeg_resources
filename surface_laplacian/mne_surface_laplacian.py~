@@ -142,13 +142,12 @@ def _compute_perrin_surf_laplacian(data, G, H, smoothing):
 
     Gs = G + np.identity(num_electrodes) * smoothing
 
-    GsinvS = np.sum(inv(Gs), axis=1)
-    
-    # Python lstsq gives different answer than MATLAB \
-    d = np.linalg.lstsq(Gs.T, data)[0].T
+    Gi = inv(Gs)
 
-    tmp = np.sum(d, axis=1) / np.sum(GsinvS)
-    C = d - tmp[:, np.newaxis].dot(GsinvS[np.newaxis, :])
+    d = data.T.dot(Gi)
+
+    tmp = (np.sum(d, axis=1) / np.sum(Gi))
+    C = d - tmp[:, np.newaxis].dot(np.sum(Gi, axis=1)[np.newaxis, :])
 
     surf_lap = C.dot(H.T).T
 
