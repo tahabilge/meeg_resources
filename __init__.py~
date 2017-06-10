@@ -1,4 +1,0 @@
-""" MEEG Resources for MGH Division of Neurotherapeutics """
-
-from .meg_bay_resources.meg_bay_utilities import (EEG_CHANNEL_MAPPINGS)
-from .surface_laplacian import surface_laplacian
